@@ -4,6 +4,47 @@
     
 @section('extra-style')
 <style>
+
+.option-card {
+        cursor: pointer;
+        border: 2px solid #dee2e6;
+        border-radius: 12px;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .option-card:hover:not(.active-option) {
+        transform: translateY(-3px);
+        border-color: #A12C2F;
+        box-shadow: 0 4px 15px rgba(161, 44, 47, 0.1);
+    }
+
+    .active-option {
+        border-color: #D4AF37 !important;
+        background: rgba(212, 175, 55, 0.05);
+        transform: translateY(-3px);
+    }
+
+    .form-check-input {
+        width: 1.3em;
+        height: 1.3em;
+        margin-top: 0;
+    }
+
+    .form-check-input:checked {
+        background-color: #D4AF37;
+        border-color: #D4AF37;
+    }
+
+    .check-icon {
+        opacity: 0;
+        transform: scale(0.8);
+        transition: all 0.3s ease;
+    }
+
+    .active-option .check-icon {
+        opacity: 1;
+        transform: scale(1);
+    }
     .text-gold-200 {
         color: rgba(212, 175, 55, 0.8);
     }
@@ -56,31 +97,33 @@
             <form method="POST" action="{{ route('polls.vote', $poll) }}" class="p-6">
                 @csrf
                 <div class="space-y-4 mb-6" x-data="{ selected: null }">
-                    @foreach($poll->options as $option)
-                    <label 
-                        class="flex items-center p-4 rounded-lg border-2 cursor-pointer transition-all duration-200"
-                        :class="{ 
-                            'border-[#D4AF37] bg-[#fff5e1]': selected === {{ $option->id }},
-                            'border-gray-200 hover:border-[#D4AF37]/50': selected !== {{ $option->id }}
-                        }"
-                        
-                    >
-                        <input 
-                            type="radio" 
-                            name="option_id" 
-                            value="{{ $option->id }}" 
-                            class="hidden"
-                            required
-                        >
-                        <div class="w-6 h-6 rounded-full border-2 border-[#A12C2F] mr-3 flex items-center justify-center">
-                            <div 
-                            class="w-3 h-3 rounded-full bg-[#D4AF37] transition-all duration-200"
-                            :class="{ 'scale-0': selected !== {{ $option->id }}, 'scale-100': selected === {{ $option->id }} }"
-                        ></div>
+                    <div class="row g-3">
+                        @foreach($poll->options as $option)
+                        <div class="col-12 col-md-6">
+                            <div class="card option-card shadow-sm hover-shadow transition-all"
+                                 :class="{ 'active-option': selected === {{ $option->id }} }"
+                                 @click="selected = {{ $option->id }}">
+                                <div class="card-body d-flex align-items-center">
+                                    <div class="form-check me-3">
+                                        <input 
+                                            type="radio" 
+                                            name="option_id" 
+                                            value="{{ $option->id }}" 
+                                            class="form-check-input"
+                                            :checked="selected === {{ $option->id }}"
+                                            required>
+                                    </div>
+                                    <div class="flex-grow-1">
+                                        <h5 class="mb-0">{{ $option->text }}</h5>
+                                    </div>
+                                    <div class="check-icon ms-2">
+                                        <i class="bi bi-check2-circle fs-4 text-success"></i>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <span class="text-lg">{{ $option->text }}</span>
-                    </label>
-                    @endforeach
+                        @endforeach
+                    </div>
                 </div>
                 <button 
                     type="submit" 
