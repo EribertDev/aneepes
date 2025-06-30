@@ -34,5 +34,19 @@ return [
             'channel' => env('SLACK_BOT_USER_DEFAULT_CHANNEL'),
         ],
     ],
+    'fedapay' => [
+    'secret_key' => env('FEDAPAY_SECRET_KEY'),
+    'public_key' => env('FEDAPAY_PUBLIC_KEY'),
+    'env' => env('FEDAPAY_ENV', 'sandbox'),
+     'api_base' => env('FEDAPAY_API_BASE', 
+        env('FEDAPAY_ENV') === 'sandbox' 
+            ? 'https://cdn.fedapay.com/checkout.js?v=1.1.7' 
+            : 'https://cdn.fedapay.com/checkout.js?v=1.1.7')
+],
+'secure' => env('SESSION_SECURE_COOKIE', true),
+
+
+ 
+
 
 ];

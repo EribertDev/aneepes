@@ -22,6 +22,7 @@
     .category-pill {
         min-width: 150px;
         text-align: center;
+       
         border-radius: 2rem;
         margin: 0 0.5rem;
         transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
@@ -122,9 +123,9 @@
             <div class="category-nav-scroller">
                 <nav class="nav nav-pills justify-content-center flex-nowrap pb-3">
                     <a class="nav-link category-pill active" href="#" data-category="all">Toutes catégories</a>
-                    @foreach(['technology', 'business', 'health', 'entertainment', 'emploi', 'culture', 'autre'] as $category)
-                    <a class="nav-link category-pill" href="#" data-category="{{ $category }}">
-                        {{ ucfirst($category) }}
+                    @foreach(['sante', 'academique', 'emploi', 'culture', 'logement', 'evenements','technology', 'autre'] as $category)
+                    <a class="nav-link category-pill text-primary" href="#" data-category="{{ $category }}">
+                       <span class="text-dark"> {{ ucfirst($category) }} </span>
                     </a>
                     @endforeach
                 </nav>
@@ -153,8 +154,7 @@
                             <img src="{{ $post->editor->avatar ? Storage::url($post->editor->avatar) : asset('default-avatar.png') }}" 
                                  class="rounded-circle" 
                                  alt="{{ $post->editor->name }}"
-                                 width="40" 
-                                 height="40">
+                                 style="width: 40px; height: 40px;">
                         </div>
                         <div>
                             <p class="mb-0 fw-bold text-danger">{{ $post->editor->name }}</p>
@@ -166,7 +166,7 @@
 
                     <!-- Contenu -->
                     <h3 class="h5 card-title text-dark mb-3">{{ Str::limit($post->title, 60) }}</h3>
-                    <p class="card-text text-muted mb-4">{{ Str::limit($post->content, 120) }}</p>
+                    <p class="card-text text-muted mb-4">{!! Str::limit($post->content, 120)!!}</p>
                     
                     <!-- Bouton Lire la suite -->
                     <a href="{{ route('blog.show', $post) }}" 

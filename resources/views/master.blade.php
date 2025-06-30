@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>ANEPES-@yield('title', 'Titre par défaut')</title>
+    <title>ANEPES-@yield('title', 'Titre par défaut')</title> 
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <meta content="" name="keywords">
     <meta name="description" content="@yield('description', 'ANEPES')">

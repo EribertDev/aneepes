@@ -104,6 +104,10 @@
                                 <option value="seminaire" {{ old('type') == 'seminaire' ? 'selected' : '' }}>Séminaire</option>
                                 <option value="autre" {{ old('type') == 'autre' ? 'selected' : '' }}>Autre</option>
                             </select>
+                            
+
+
+                            
                             @error('type')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror

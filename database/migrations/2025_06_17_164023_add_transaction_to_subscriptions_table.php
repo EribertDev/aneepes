@@ -11,19 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
-            //
-            $table->enum('status', ['draft', 'published', 'archived']);
-            $table->enum('category', ['sante', 'academique', 'emploi', 'culture','logement','evenements','technology','autre']);
+      
+        Schema::table('subscriptions', function (Blueprint $table) {
+            $table->string('transaction')->nullable()->after('amount');
         });
     }
+    
 
     /**
      * Reverse the migrations.
      */
     public function down(): void
     {
-        Schema::table('posts', function (Blueprint $table) {
+        Schema::table('subscriptions', function (Blueprint $table) {
             //
         });
     }

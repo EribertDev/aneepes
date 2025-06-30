@@ -201,19 +201,9 @@
             <!-- Contrôles de filtre -->
             <div class="event-filters mb-4">
                 <div class="row g-3">
+                 
                     <div class="col-lg-4">
-                        <select class="form-select" style="border-color: #D4AF37;">
-                            <option>Tous les départements</option>
-                            <option>Mathématiques</option>
-                            <option>Physique</option>
-                            <option>Chimie</option>
-                            <option>Informatique</option>
-                        </select>
-                    </div>
-                    <div class="col-lg-4">
-                        <div class="date-filter">
-                            <input type="text" class="form-control date-picker" placeholder="Choisir une date" style="border-color: #D4AF37;">
-                        </div>
+                       
                     </div>
                     <div class="col-lg-4">
                         <div class="switch-container">
@@ -228,11 +218,11 @@
             </div>
     
             <!-- Grille d'événements -->
-            <div class="event-grid">
+            <div class="event-grid" id="eventsContainer">
                 <div class="row g-4">
                     @foreach($events as $event)
                     <div class="col-md-6 col-lg-4 ">
-                        <div class="event-card">
+                        <div class="event-card" data-status="{{ $event->statut }}">
                             <div class="event-badge {{ $event->statut === 'a_venir' ? 'upcoming' : 'past' }}">
                                 {{  $event->statut === 'a_venir' ? 'À venir' : 'Terminé' }}
                               
@@ -274,26 +264,54 @@
 @endsection
 
 @section('extra-script')
-<script>
-    // Initialisation du calendrier
-    document.addEventListener('DOMContentLoaded', function() {
-        // Intégration d'un calendrier interactif
-        const calendar = new Calendar('#eventCalendar', {
-            events: [
-                {
-                    date: '2023-11-15',
-                    title: 'Atelier scientifique'
-                }
-            ],
-            eventColor: '#A12C2F'
+   <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggle = document.getElementById('pastEventsToggle');
+            const eventsContainer = document.getElementById('eventsContainer');
+            const eventCards = document.querySelectorAll('.event-card');
+            
+            // Mettre à jour les compteurs d'événements
+            function updateEventCounters() {
+                const totalEvents = document.querySelectorAll('.event-card').length;
+                const upcomingEvents = document.querySelectorAll('.event-card[data-status="upcoming"]').length;
+                const pastEvents = document.querySelectorAll('.event-card[data-status="past"]').length;
+                
+                document.getElementById('totalEvents').textContent = totalEvents;
+                document.getElementById('upcomingEvents').textContent = upcomingEvents;
+                document.getElementById('pastEvents').textContent = pastEvents;
+            }
+            
+            // Fonction pour filtrer les événements
+            function filterEvents() {
+                eventCards.forEach(card => {
+                    if (card.dataset.status === 'termine') {
+                        if (toggle.checked) {
+                            card.style.display = 'flex';
+                        } else {
+                            card.style.display = 'none';
+                        }
+                    }
+                   
+                });
+            }
+            
+            
+
+
+          
+            
+            // Écouter le changement du toggle
+                toggle.addEventListener('change', function() {
+            // Appeler d'abord la fonction de filtrage
+            filterEvents();
+            
+            
+            
+          
         });
-    
-        // Gestion du toggle événements passés
-        document.getElementById('pastEventsToggle').addEventListener('change', function() {
-            document.querySelectorAll('.past-event').forEach(el => {
-                el.style.display = this.checked ? 'block' : 'none';
-            });
+            
+        
+         
         });
-    });
     </script>
 @endsection

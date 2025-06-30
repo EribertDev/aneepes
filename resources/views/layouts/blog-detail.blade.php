@@ -127,8 +127,7 @@
                     <img src="{{ Storage::url($post->editor->avatar) }}" 
                          class="rounded-circle me-3" 
                          alt="{{ $post->editor->avatar }}" 
-                         width="25" 
-                         height="45">
+                         style="width: 40px; height: 40px;">
                     <div>
                         <h5 class="mb-0 text-danger">{{ $post->editor->name }}</h5>
                         <small class="text-muted">
@@ -225,8 +224,7 @@
                                 <img src="{{ $comment->user->avatar ? Storage::url($comment->user->avatar) : asset('default-avatar.png') }}" 
                                      class="rounded-circle avatar-img" 
                                      alt="{{ $comment->user->name }}"
-                                     width="48"
-                                     height="48">
+                                     style="width: 40px; height: 40px;">
                             </div>
                 
                             <!-- Contenu du commentaire -->

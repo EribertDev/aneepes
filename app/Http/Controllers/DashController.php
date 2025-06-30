@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Event;
+use App\Models\Actualite;
+use Carbon\Carbon;
 
 
 class DashController extends Controller
@@ -17,8 +19,12 @@ class DashController extends Controller
     {
         //
         $recentUsers=User::latest() ->paginate(8);
-        $activities=Event::latest() ->paginate(8);;
-        return view('admin.home',compact('recentUsers','activities'));
+        $pendingCount = Actualite::where('status', 'draft')->count();
+        $upcomingEvents = Event::where('date_heure', '>', now())->count();
+        $newRegistrationsWeek = User::where('created_at', '>=', Carbon::now()->subWeek())
+    ->count();
+        $totalUsers = User::where('role', 'user')->count();
+        return view('admin.home',compact('recentUsers','pendingCount', 'upcomingEvents', 'newRegistrationsWeek', 'totalUsers'));
 
     }
 

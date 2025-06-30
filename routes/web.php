@@ -15,6 +15,9 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\DashController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\SubscriptionController;
+use App\Http\Controllers\MembersController;
 
 
 
@@ -36,16 +39,14 @@ Route::middleware('auth')->group(function () {
 // Route Staff
 Route::get('/admin', [DashController::class,'index'])->name('dashboard');
 
-Route::get('/staff', function () {
-    return view('admin.staff');
-})->middleware(['auth', 'verified'])->name('staff');
+Route::get('/staff', [MemberController::class, 'index'])->middleware(['auth', 'verified'])->name('staff');
 Route::post('/users', [MemberController::class, 'store'])->name('users.store');
+Route::put('/users/update/{id}', [MemberController::class, 'update'])->name('users.update');
+Route::delete('/users/{id}', [MemberController::class, 'destroy'])->name('users.destroy');
 
 
 // Route A propos
-Route::get('/about',function (){
-    return view('layouts.about');
-})->name('about');
+Route::get('about',[HomeController::class, 'about'])->name('about');
 
 //Route actualités
 Route::get('/actualites',[ NewsController::class, 'index'])->name('actualites');
@@ -78,6 +79,25 @@ Route::post('/contact', [ContactController::class, 'submitForm'])->name('contact
 Route::get('/sondage',function (){
     return view('layouts.sondage');
 })->name('sondage');
+
+//ROUTE DON 
+Route::get('/soutient/fneb',function (){
+    return view('layouts.don');
+})->name('don');
+
+Route::get('payment/finish',function() {
+    return view('layouts.paiement_finish');
+});
+
+//Route Newsletter
+ //Route NewsLetter 
+ Route::post('/newsletter/subscribe', [NewsletterController::class, 'subscribe'])
+ ->name('newsletter.subscribe');
+ 
+ Route::get('/newsletter/unsubscribe/{token}', [NewsletterController::class, 'unsubscribe'])
+ ->name('newsletter.unsubscribe');
+
+
 
 //Route Actualites Admin 
 Route::resource('actu', ActualitesController::class);
@@ -154,6 +174,29 @@ Route::post('/blog/{post}/ratings', [BlogController::class, 'storeRating'])
 
 Route::post('/posts/{post}/ratings', [BlogController::class, 'storeRating'])
      ->name('posts.ratings.store');
+
+
+//Route Cotisation
+Route::get('/cotisations', [SubscriptionController::class, 'index'])->name('subscriptions.index');
+Route::get('/cotisations/paiement', [SubscriptionController::class, 'showPaymentForm'])->name('subscriptions.payment');
+Route::post('/cotisations/process', [SubscriptionController::class, 'processPayment'])->name('subscriptions.process');
+Route::post('/cotisations/verify', [SubscriptionController::class, 'handleCallback'])->name('subscriptions.callback');
+Route::get('/cotisations/success', [SubscriptionController::class, 'success'])->name('subscriptions.success');
+Route::get('/cotisations/check-pending/{id}', [SubscriptionController::class, 'checkPendingPayment']);
+Route::get('/cotisations/failed', [SubscriptionController::class, 'failed'])->name('subscriptions.failed');
+
+//Route Subscription
+Route::get('/subscription',[SubscriptionController::class,'subscription'])->name('subscription');
+
+//Route Members
+Route::get('/members', [MembersController::class, 'index'])->name('members.index');
+Route::post('/members', [MembersController::class, 'store'])->name('members.store');
+Route::get('/members/create', [MembersController::class, 'create'])->name('members.create');
+Route::get('/members/{member}/edit', [MembersController::class, 'edit'])->name('members.edit');
+//Route::put('/members/update/{member}', [MembersController::class, 'update'])->name('members.update');
+Route::delete('/members/{member}', [MembersController::class, 'destroy'])->name('members.destroy');
+Route::put('/members/{member}', [MembersController::class, 'update'])->name('members.update');
+
 
 
 require __DIR__.'/auth.php';

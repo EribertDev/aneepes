@@ -5,6 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Event;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Newsletter ;
+use App\Notifications\NewContentNotification;
+use Illuminate\Support\Str;
+
 
 class EventController extends Controller
 {
@@ -45,15 +49,32 @@ class EventController extends Controller
             'date_heure' => 'required|date',
             'statut' => 'required|in:a_venir,termine',
             'type' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|'
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif'
         ]);
     
         // Gestion de l'image
         if ($request->hasFile('image')) {
             $validated['image'] = $request->file('image')->store('events', 'public');
         }
-    
-        Event::create($validated);
+   
+         $evenement=Event::create($validated);
+
+        
+
+        if ( $validated['statut']  === 'a_venir') {
+            $subscribers = Newsletter::get();
+            
+            foreach ($subscribers as $subscriber) {
+                $subscriber->notify(new NewContentNotification(
+                    'événement',
+                    $validated['titre'],
+                    Str::limit(strip_tags( $validated['description']), 150),
+                    route('event.show',$evenement->id)
+                ));
+            }
+            
+           
+        }
     
         return redirect()->route('events.index')
                          ->with('success', 'Événement créé avec succès!');

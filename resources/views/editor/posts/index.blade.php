@@ -71,21 +71,7 @@
                                 </button>
                             </div>
                         </div>
-                        <div class="col-md-8">
-                            <div class="d-flex justify-content-end gap-2">
-                                <select class="form-select w-auto">
-                                    <option>Tous les statuts</option>
-                                    <option>Publié</option>
-                                    <option>Brouillon</option>
-                                    <option>Archivé</option>
-                                </select>
-                                <select class="form-select w-auto">
-                                    <option>Trier par date</option>
-                                    <option>Plus récent</option>
-                                    <option>Plus ancien</option>
-                                </select>
-                            </div>
-                        </div>
+                       
                     </div>
 
                     <!-- Tableau des articles -->
@@ -197,7 +183,7 @@
                     Êtes-vous sûr de vouloir supprimer définitivement cet article ?
                 </div>
                 <div class="modal-footer">
-                    <form method="POST" action="{{ route('admin.posts.destroy', $post) }}">
+                    <form method="POST" action="">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-danger">Confirmer</button>

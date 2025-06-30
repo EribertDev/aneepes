@@ -91,9 +91,9 @@
         
         <div class="row g-4">
             @foreach($news as $item)
-            <meta property="og:title" content="{{ $item->title }}">
-<meta property="og:description" content="{{ $item->subtitle }}">
-<meta property="og:image" content="{{ asset('storage/' . $item->photo) }}">
+                <meta property="og:title" content="{{ $item->title }}">
+                <meta property="og:description" content="{{ $item->subtitle }}">
+                <meta property="og:image" content="{{ asset('storage/' . $item->photo) }}">
             <div class="col-12 col-md-6 col-lg-4">
                 <article class="news-card card border-0 h-100 shadow-hover">
                     <div class="img-container position-relative overflow-hidden">

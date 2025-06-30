@@ -3,6 +3,8 @@
 @section('title', 'Sondage')
     
 @section('extra-style')
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@3.4.1/dist/tailwind.min.css" rel="stylesheet">
+
 <style>
 
 .option-card {

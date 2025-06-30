@@ -76,7 +76,7 @@
             <div class="card stat-card bg-gold-gradient text-white hover-scale">
                 <div class="card-body">
                     <i class="bi bi-people fs-1"></i>
-                    <h2 class="mb-0">1,234</h2>
+                    <h2 class="mb-0"> {{ $totalUsers}} </h2>
                     <small>Étudiants inscrits</small>
                 </div>
             </div>
@@ -86,8 +86,8 @@
             <div class="card stat-card bg-red-gradient text-white hover-scale">
                 <div class="card-body">
                     <i class="bi bi-calendar-event fs-1"></i>
-                    <h2 class="mb-0">15</h2>
-                    <small>Événements actifs</small>
+                    <h2 class="mb-0"> {{ $upcomingEvents}} </h2>
+                    <small>Événements à venir</small>
                 </div>
             </div>
         </div>
@@ -96,7 +96,7 @@
             <div class="card stat-card bg-dark text-white hover-scale">
                 <div class="card-body">
                     <i class="bi bi-file-post fs-1"></i>
-                    <h2 class="mb-0">47</h2>
+                    <h2 class="mb-0"> {{$pendingCount}} </h2>
                     <small>Publications en attente</small>
                 </div>
             </div>
@@ -106,8 +106,8 @@
             <div class="card stat-card bg-primary text-white hover-scale">
                 <div class="card-body">
                     <i class="bi bi-clock-history fs-1"></i>
-                    <h2 class="mb-0">23</h2>
-                    <small>Nouvelles inscriptions (24h)</small>
+                    <h2 class="mb-0"> {{ $newRegistrationsWeek}} </h2>
+                    <small>Nouvelles inscriptions (7 derniers jours)</small>
                 </div>
             </div>
         </div>
@@ -118,14 +118,7 @@
         <!-- Colonne gauche -->
         <div class="col-xl-8">
             <!-- Graphiques -->
-            <div class="card shadow-sm mb-4">
-                <div class="card-header bg-white">
-                    <h5 class="mb-0">Activité récente</h5>
-                </div>
-                <div class="card-body">
-                    <canvas id="activityChart" style="height: 300px;"></canvas>
-                </div>
-            </div>
+          
 
             <!-- Dernières inscriptions -->
             <div class="card shadow-sm">
@@ -182,60 +175,14 @@
                 </div>
             </div>
 
-            <!-- Activité récente -->
-            <div class="card shadow-sm">
-                <div class="card-header bg-white">
-                    <h5 class="mb-0">Journal d'activité</h5>
-                </div>
-                <div class="card-body activity-feed">
-                    @foreach($activities as $activity)
-                    <div class="activity-item">
-                        <div class="activity-icon bg-gold-gradient">
-                            <i class="nav-icon fas fa-calendar-alt"></i>
-                        </div>
-                        <div class="activity-content">
-                            <p class="mb-1">{{ $activity->titre }}</p>
-                            <small class="text-muted"> {{ $activity->date_heure->locale('fr')->diffForHumans() }}</small>
-                        </div>
-                    </div>
-                    @endforeach
-                </div>
-            </div>
-        </div>
+         
     </div>
 </div>
 @endsection
 
 @section('extra-script')
 <script>
-// Configuration du graphique
-const ctx = document.getElementById('activityChart').getContext('2d');
-new Chart(ctx, {
-    type: 'line',
-    data: {
-        labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'],
-        datasets: [{
-            label: 'Inscriptions',
-            data: [65, 59, 80, 81, 56, 55],
-            borderColor: '#A12C2F',
-            tension: 0.4
-        },
-        {
-            label: 'Événements',
-            data: [28, 48, 40, 19, 86, 27],
-            borderColor: '#D4AF37',
-            tension: 0.4
-        }]
-    },
-    options: {
-        responsive: true,
-        plugins: {
-            legend: {
-                position: 'top',
-            }
-        }
-    }
-});
+
 </script>
 
 @endsection

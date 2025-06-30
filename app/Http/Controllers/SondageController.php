@@ -15,7 +15,7 @@ class SondageController extends Controller
         //
         $polls = Polls::where('is_public', true)
         ->where('status', 'active')
-        ->paginate(10);
+        ->paginate(5);
 
     return view('layouts.sondage', compact('polls'));
     }

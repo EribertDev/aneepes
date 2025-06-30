@@ -7,6 +7,8 @@ use App\Models\Polls;
 use Illuminate\Http\Request;
 use App\Models\PollOption;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Vote;
+use Illuminate\Support\Facades\DB;
 
 
 class AdminPollController extends Controller
@@ -94,10 +96,20 @@ class AdminPollController extends Controller
     public function destroy(Polls $poll)
     {   
         
-        
-        $poll->options()->delete();
 
+          DB::transaction(function () use ($poll) {
+        // 1. Supprimer tous les votes pour ce sondage
+        Vote::whereIn('poll_option_id', $poll->options()->pluck('id'))->delete();
+        
+        // 2. Supprimer les options
+        $poll->options()->delete();
+        
+        // 3. Supprimer le sondage
         $poll->delete();
+
+    });
+        
+    
         return back()->with('success', 'Sondage archivé !');
     }
 }

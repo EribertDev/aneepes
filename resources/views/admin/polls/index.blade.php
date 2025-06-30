@@ -1,5 +1,5 @@
 @extends('dashboard')
-@section('title', 'Create Event')
+@section('title', 'Create Poll')
 @section('extra-style')
 @endsection
 @section('content')

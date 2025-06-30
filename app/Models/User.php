@@ -55,4 +55,9 @@ class User extends Authenticatable
 {
     return $value ? Storage::url($value) : asset('default-avatar.png');
 }
+public function hasRole($role)
+{
+    return $this->role === $role;
+}
+
 }

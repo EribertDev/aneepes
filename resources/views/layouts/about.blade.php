@@ -3,224 +3,271 @@
 @section('extra-style')
 
 <style>
-            :root {
-            --primary-maroon: #A12C2F;
-            --accent-gold: #D4AF37;
-            --light-bg: #faf6f0;
-        }
+    :root {
+    --primary-maroon: #A12C2F;
+    --accent-gold: #D4AF37;
+    --light-bg: #faf6f0;
+    }
 
-        body {
-            font-family: 'Poppins', sans-serif;
-            line-height: 1.6;
-            color: #333;
-        }
+    body {
+    font-family: 'Poppins', sans-serif;
+    line-height: 1.6;
+    color: #333;
+    }
 
-        .objectives-section {
+    .objectives-section {
     background: #fff5f5;
     padding: 4rem 2rem;
-}
+    }
 
-.objective-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2rem;
-}
-
-.objective-card {
-    background: white;
-    border-left: 4px solid var(--accent-gold);
-    margin-bottom: 1.5rem;
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 3px 15px rgba(161,44,47,0.05);
-    display: flex;
-    align-items: start;
-    transition: transform 0.3s;
-}
-
-.objective-card:hover {
-    transform: translateX(10px);
-}
-
-.objective-icon {
-    font-size: 1.8rem;
-    margin-right: 1rem;
-    color: var(--primary-maroon);
-    min-width: 50px;
-    text-align: center;
-}
-
-.objective-content h3 {
-    color: var(--primary-maroon);
-    margin-bottom: 0.5rem;
-    font-size: 1.1rem;
-}
-
-.objective-content p {
-    color: #666;
-    font-size: 0.9rem;
-    line-height: 1.5;
-}
-
-@media (max-width: 768px) {
     .objective-grid {
-        grid-template-columns: 1fr;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
     }
-    
+
     .objective-card {
-        flex-direction: column;
+        background: white;
+        border-left: 4px solid var(--accent-gold);
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+        border-radius: 8px;
+        box-shadow: 0 3px 15px rgba(161,44,47,0.05);
+        display: flex;
         align-items: start;
+        transition: transform 0.3s;
+    }
+
+    .objective-card:hover {
+        transform: translateX(10px);
+    }
+
+    .objective-icon {
+        font-size: 1.8rem;
+        margin-right: 1rem;
+        color: var(--primary-maroon);
+        min-width: 50px;
+        text-align: center;
+    }
+
+    .objective-content h3 {
+        color: var(--primary-maroon);
+        margin-bottom: 0.5rem;
+        font-size: 1.1rem;
+    }
+
+    .objective-content p {
+        color: #666;
+        font-size: 0.9rem;
+        line-height: 1.5;
+    }
+
+    @media (max-width: 768px) {
+        .objective-grid {
+            grid-template-columns: 1fr;
+        }
+        
+        .objective-card {
+            flex-direction: column;
+            align-items: start;
+        }
+        
+        .objective-icon {
+            margin-bottom: 1rem;
+        }
+    }
+
+    /* Header */
+    .hero-header {
+        background: linear-gradient(45deg, var(--primary-maroon) 40%, #8a1f22);
+        padding: 2rem 1rem;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .logo-container {
+        max-width: 200px;
+        margin: 0 auto 2rem;
+    }
+
+    .logo-container img {
+        width: 100%;
+        height: auto;
+    }
+
+    /* Section Titre */
+    .section-title {
+        color: var(--primary-maroon);
+        position: relative;
+        padding-bottom: 1rem;
+        margin: 2rem 0;
+    }
+
+    .section-title::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 50px;
+        height: 3px;
+        background: var(--accent-gold);
+    }
+
+    /* Cartes Devises */
+    .motto-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        padding: 3rem 0;
+    }
+
+    .motto-card {
+        background: white;
+        padding: 2rem;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(161,44,47,0.1);
+        text-align: center;
+        transition: transform 0.3s;
+        border: 2px solid var(--accent-gold);
+    }
+
+    .motto-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .motto-icon {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        color: var(--accent-gold);
+    }
+
+    /* Section Constitution */
+    .constitution-section {
+        background: var(--light-bg);
+        padding: 4rem 2rem;
+    }
+
+    .department-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .department-card {
+        background: white;
+        padding: 1rem;
+        border-radius: 8px;
+        text-align: center;
+        border-left: 4px solid var(--primary-maroon);
+    }
+
+    /* Section Objectifs */
+    .objectives-section {
+        background: var(--light-bg);
+        padding: 4rem 2rem;
+    }
+
+    .objective-grid {
+        column-count: 2;
+        column-gap: 3rem;
+    }
+
+    .objective-item {
+        break-inside: avoid;
+        margin-bottom: 1.5rem;
+        padding: 1.5rem;
+        background: white;
+        border-left: 4px solid var(--accent-orange);
+    }
+
+
+    /* Board Members */
+    .board-section {
+        padding: 5rem 0;
+        background: linear-gradient(rgba(250, 246, 240, 0.9), rgba(250, 246, 240, 0.9)), 
+                    url('{{ asset("assets/images/pattern.png") }}');
+        background-size: cover;
+        background-position: center;
     }
     
-    .objective-icon {
-        margin-bottom: 1rem;
+    .member-card {
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+        background: white;
     }
-}
-
-        /* Header */
-        .hero-header {
-            background: linear-gradient(45deg, var(--primary-maroon) 40%, #8a1f22);
-            padding: 2rem 1rem;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .logo-container {
-            max-width: 200px;
-            margin: 0 auto 2rem;
-        }
-
-        .logo-container img {
-            width: 100%;
-            height: auto;
-        }
-
-        /* Section Titre */
-        .section-title {
-            color: var(--primary-maroon);
-            position: relative;
-            padding-bottom: 1rem;
-            margin: 2rem 0;
-        }
-
-        .section-title::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 50px;
-            height: 3px;
-            background: var(--accent-gold);
-        }
-
-        /* Cartes Devises */
-        .motto-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
+    
+    .member-card:hover {
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 15px 40px rgba(161, 44, 47, 0.15);
+    }
+    
+    .member-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0.9;
+        transition: opacity 0.3s ease;
+    }
+    
+    .member-card:hover .member-overlay {
+        opacity: 1;
+    }
+    
+    .social-links a {
+        transition: all 0.3s ease;
+        width: 36px;
+        height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(161, 44, 47, 0.1);
+    }
+    
+    .social-links a:hover {
+        background: #A12C2F;
+        color: white !important;
+        transform: translateY(-3px);
+    }
+    
+    .card-title {
+        font-family: 'Montserrat', sans-serif;
+        font-weight: 700;
+        position: relative;
+        display: inline-block;
+    }
+    
+    .card-title::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 2px;
+        background: #D4AF37;
+        transition: width 0.3s ease;
+    }
+    
+    .member-card:hover .card-title::after {
+        width: 80px;
+    }
+    
+    @media (max-width: 768px) {
+        .board-section {
             padding: 3rem 0;
         }
-
-        .motto-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(161,44,47,0.1);
-            text-align: center;
-            transition: transform 0.3s;
-            border: 2px solid var(--accent-gold);
-        }
-
-        .motto-card:hover {
-            transform: translateY(-5px);
-        }
-
-        .motto-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: var(--accent-gold);
-        }
-
-        /* Section Constitution */
-        .constitution-section {
-            background: var(--light-bg);
-            padding: 4rem 2rem;
-        }
-
-        .department-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .department-card {
-            background: white;
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            border-left: 4px solid var(--primary-maroon);
-        }
-
-        /* Section Objectifs */
-        .objectives-section {
-            background: var(--light-bg);
-            padding: 4rem 2rem;
-        }
-
-        .objective-grid {
-            column-count: 2;
-            column-gap: 3rem;
-        }
-
-        .objective-item {
-            break-inside: avoid;
-            margin-bottom: 1.5rem;
-            padding: 1.5rem;
-            background: white;
-            border-left: 4px solid var(--accent-orange);
-        }
-
-
-        /* Board Members */
-        .board-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            padding: 3rem 0;
-        }
+        
         .member-card {
-    transition: transform 0.3s, box-shadow 0.3s;
-    border-radius: 15px !important;
-    overflow: hidden;
-}
-
-.member-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(161,44,47,0.1) !important;
-}
-
-.member-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-}
-
-.social-links i {
-    transition: color 0.3s;
-    font-size: 1.2rem;
-}
-
-.social-links a:hover i {
-    color: #D4AF37 !important;
-}
-
-.card-title {
-    font-family: 'Poppins', sans-serif;
-    font-weight: 600;
-}
+            max-width: 300px;
+            margin: 0 auto;
+        }
+    }
        
 </style>
 
@@ -378,58 +425,41 @@
             <div style="position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); width: 80px; height: 3px; background: #D4AF37;"></div>
         </h2>
 
-        <div class="row g-4">
-            <!-- Membre 1 -->
+        <div class="row g-4 justify-content-center">
+            @foreach($boardMembers as $member)
             <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-                <div class="member-card card h-100 border-0 shadow-lg">
-                    <div class="card-img-top position-relative overflow-hidden" style="height: 300px;">
-                        <img src="{{asset('assets\images\team-1.jpg')}}" class="w-100 h-100 object-fit-cover" alt="Président ANEEPES">
+                <div class="member-card card h-100 border-0 shadow-lg" style="overflow: hidden;">
+                    <div class="position-relative overflow-hidden" style="height: 300px;">
+                        @if($member->photo)
+                            <img src="{{ asset('storage/'.$member->photo) }}" class="w-100 h-100 object-fit-cover" alt="{{ $member->fullname }}">
+                        @else
+                            <div class="bg-secondary w-100 h-100 d-flex align-items-center justify-content-center">
+                                <span class="text-white fw-bold" style="font-size: 3rem;">{{ substr($member->fullname, 0, 1) }}</span>
+                            </div>
+                        @endif
                         <div class="member-overlay" style="background: linear-gradient(transparent 60%, rgba(161,44,47,0.9));"></div>
                     </div>
-                    <div class="card-body text-center">
-                        <h5 class="card-title" style="color: #A12C2F;">John Doe</h5>
-                        <p class="text-uppercase small mb-3" style="color: #D4AF37; letter-spacing: 1px;">Président National</p>
+                    <div class="card-body text-center py-4">
+                        <h5 class="card-title mb-1" style="color: #A12C2F; font-weight: 600;">{{ $member->fullname }}</h5>
+                        <p class="text-uppercase small mb-3" style="color: #D4AF37; letter-spacing: 1px;">
+                            {{ $member->role }}
+                        </p>
                         <div class="social-links d-flex justify-content-center gap-3">
-                            <a href="#" class="text-decoration-none" style="color: #A12C2F;">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="text-decoration-none" style="color: #A12C2F;">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="#" class="text-decoration-none" style="color: #A12C2F;">
+                            @if($member->email)
+                            <a href="mailto:{{ $member->email }}" class="text-decoration-none" style="color: #A12C2F;" title="Envoyer un email">
                                 <i class="fas fa-envelope"></i>
                             </a>
+                            @endif
+                            @if($member->phone)
+                            <a href="tel:{{ $member->phone }}" class="text-decoration-none" style="color: #A12C2F;" title="Téléphoner">
+                                <i class="fas fa-phone"></i>
+                            </a>
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
-
-            <!-- Membre 2 -->
-            <div class="col-12 col-md-6 col-lg-4 col-xl-3">
-                <div class="member-card card h-100 border-0 shadow-lg">
-                    <div class="card-img-top position-relative overflow-hidden" style="height: 300px;">
-                        <img src="{{asset('assets\images\team-1.jpg')}}" class="w-100 h-100 object-fit-cover" alt="Vice-Présidente">
-                        <div class="member-overlay" style="background: linear-gradient(transparent 60%, rgba(161,44,47,0.9));"></div>
-                    </div>
-                    <div class="card-body text-center">
-                        <h5 class="card-title" style="color: #A12C2F;">Jane Smith</h5>
-                        <p class="text-uppercase small mb-3" style="color: #D4AF37; letter-spacing: 1px;">Vice-Présidente</p>
-                        <div class="social-links d-flex justify-content-center gap-3">
-                            <a href="#" class="text-decoration-none" style="color: #A12C2F;">
-                                <i class="fab fa-twitter"></i>
-                            </a>
-                            <a href="#" class="text-decoration-none" style="color: #A12C2F;">
-                                <i class="fab fa-linkedin"></i>
-                            </a>
-                            <a href="#" class="text-decoration-none" style="color: #A12C2F;">
-                                <i class="fas fa-envelope"></i>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ajouter les autres membres de la même manière -->
+            @endforeach
         </div>
     </div>
 </section>

@@ -1,0 +1,349 @@
+
+  .hero-section {
+      padding: 100px 0;
+      background: linear-gradient(45deg, #A12C2F, #D4AF37);
+  }
+
+  .hover-lift {
+      transition: transform 0.3s ease;
+  }
+
+  .hover-lift:hover {
+      transform: translateY(-5px);
+  }
+
+  .news-card {
+      height: 100%;
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+  }
+
+  .event-date .date-box {
+      text-align: center;
+      padding: 15px;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+  }
+
+  .member-photo {
+      width: 150px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin: -50px auto 20px;
+      border: 3px solid #A12C2F;
+  }
+
+  .countdown-timer {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      margin: 20px 0;
+  }
+
+  .countdown-item {
+      text-align: center;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 15px;
+      border-radius: 10px;
+      min-width: 80px;
+  }
+
+  .btn-gold {
+      background: #D4AF37;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 30px;
+  }
+
+  /* Styles généraux */
+  .section-title {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #A12C2F;
+      position: relative;
+  }
+
+  .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -10px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: #D4AF37;
+  }
+
+  .btn-gold {
+      background: #D4AF37;
+      color: white;
+      border: none;
+      padding: 10px 25px;
+      border-radius: 30px;
+  }
+
+  .card {
+      border: none;
+      border-radius: 15px;
+      overflow: hidden;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+
+	.card-img {
+    height: 200px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+  .card-img-overlay {
+      background: rgba(0, 0, 0, 0.5);
+      color: white;
+    border-radius: 15px;
+    padding: 20px;
+  }
+
+  .news-card img, .blog-card img {
+      height: 200px;
+      object-fit: cover;
+  }
+
+  .event-card {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+  }
+
+  .poll-card {
+      background: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 10px;
+      padding: 20px;
+  }
+	/*** Testimonial ***/
+.testimonial-carousel {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+}
+/*Contact*/
+.contact-form-card {
+      transition: transform 0.3s ease;
+      border-radius: 1rem;
+  }
+
+  .hover-lift:hover {
+      transform: translateY(-10px);
+  }
+
+  .contact-info-card {
+      position: relative;
+      overflow: hidden;
+      background: #A12C2F;
+  }
+
+  .contact-info-card::before {
+      content: '';
+      position: absolute;
+      top: -50px;
+      right: -50px;
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 50%;
+  }
+
+  .icon-box {
+      width: 45px;
+      height: 45px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+  }
+
+  .form-control {
+      border-width: 2px;
+  }
+
+  .form-control:focus {
+      border-color: #D4AF37;
+      box-shadow: 0 0 0 0.25rem rgba(212, 175, 55, 0.25);
+  }
+
+
+        :root {
+    --primary: #a12c2f;
+    --gold: #FFD700;
+}
+     /* Board Members */
+     .board-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        padding: 3rem 0;
+    }
+    .member-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    border-radius: 15px !important;
+    overflow: hidden;
+    }
+
+    .member-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(161,44,47,0.1) !important;
+    }
+
+    .member-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+    }
+
+    .social-links i {
+        transition: color 0.3s;
+        font-size: 1.2rem;
+    }
+
+    .social-links a:hover i {
+        color: #D4AF37 !important;
+    }
+
+    .card-title {
+        font-family: 'Poppins', sans-serif;
+        font-weight: 600;
+    }
+
+
+/* Hero Section */
+.hero-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+}
+
+.hero-overlay {
+    position: relative;
+    z-index: 1;
+    background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.5));
+    padding: 120px 0;
+}
+
+.hero-divider {
+    width: 100px;
+    height: 3px;
+    background: var(--gold);
+    margin: 0 auto;
+}
+.date-badge {
+        position: absolute;
+        top: 15px;
+        left: 15px;
+        color: white;
+        padding: 8px 12px;
+        border-radius: 8px;
+        text-align: center;
+        line-height: 1.2;
+    }
+/* Cards */
+.service-card {
+    transition: transform 0.3s;
+    border: 2px solid var(--primary);
+}
+
+.service-card:hover {
+    transform: translateY(-10px);
+    border-color: var(--gold);
+}
+
+.news-card {
+    border-left: 4px solid var(--primary);
+}
+
+/* Couleurs personnalisées */
+.text-gold { color: var(--gold) !important; }
+.bg-gold { background-color: var(--gold) !important; }
+.border-gold { border-color: var(--gold) !important; }
+.btn-outline-gold {
+    border-color: var(--gold);
+    color: var(--gold);
+}
+.btn-outline-gold:hover {
+    background-color: var(--gold);
+    color: #000;
+}
+.btn-gold {
+    background-color: var(--gold);
+    color: #000;
+    font-weight: 600;
+}
+
+
+.events-section {
+    position: relative;
+}
+
+.event-card {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: transform 0.3s;
+    position: relative;
+}
+
+.event-card:hover {
+    transform: translateY(-5px);
+}
+
+.event-badge {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    padding: 5px 15px;
+    border-radius: 20px;
+    color: white;
+    font-size: 0.9rem;
+}
+
+.event-badge.upcoming {
+    background: #A12C2F;
+}
+
+.event-badge.past {
+    background: #D4AF37;
+}
+
+.event-image {
+    height: 200px;
+    object-fit: cover;
+    width: 100%;
+}
+
+.event-content {
+    padding: 1.5rem;
+}
+
+.date-location {
+    display: flex;
+    justify-content: space-between;
+    color: #666;
+    font-size: 0.9rem;
+    margin: 1rem 0;
+}
+
+.btn-details {
+    color: #A12C2F;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+}

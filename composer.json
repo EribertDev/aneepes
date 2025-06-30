@@ -8,6 +8,7 @@
     "require": {
         "php": "^8.2",
         "ezyang/htmlpurifier": "^4.18",
+        "fedapay/fedapay-php": "^0.4.7",
         "laravel/framework": "^11.31",
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.6"

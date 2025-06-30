@@ -53,6 +53,19 @@
         overflow: hidden;
         border: 1px solid rgba(0,0,0,0.1);
     }
+    .table-hover tbody tr:hover {
+        background-color: rgba(161, 44, 47, 0.05);
+    }
+    
+    .img-thumbnail {
+        border-radius: 8px;
+        border: 1px solid #dee2e6;
+    }
+
+
+
+ 
+
     </style>
 @endsection
 @section('content')
@@ -60,7 +73,11 @@
     <i class="fas fa-user-plus me-2"></i>Nouvel utilisateur 
 </button>
 
-<!-- Modal -->
+
+
+
+
+<!-- Modal de création -->
 <div class="modal fade" id="userModal" tabindex="-1" aria-labelledby="userModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content border-0 shadow-lg">
@@ -169,6 +186,123 @@
     </div>
 </div>
 
+
+ 
+<div class="table-responsive">
+    <table class="table table-hover align-middle">
+        <thead class="table-light">
+            <tr>
+                <th>Nom</th>
+                <th>Email</th>
+                <th>Rôle</th>
+                <th>Numéro</th>
+                <th>Avatar</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($allusers as $alluser)
+            <tr>
+                <td>{{ $alluser->name }}</td>
+                <td>{{ $alluser->email }}</td>
+                <td>{{ $alluser->role }}</td>
+                <td>{{ $alluser->phone }}</td>
+                <td style="width: 200px;">
+                    <img src="{{ $alluser->avatar ? Storage::url($alluser->avatar) : asset('default-avatar.png') }}"
+                         class="img-thumbnail" 
+                         alt="Profil de {{ $alluser->name }}"
+                         style="width: 80px; height: 60px; object-fit: cover;">
+                </td>
+                <td>
+                    <div class="d-flex gap-2">
+                        <a href="#" 
+                           class="btn btn-sm btn-primary"
+                           data-bs-toggle="modal"
+                           data-bs-target="#editUserModal"
+                           onclick="populateEditModal({{ $alluser }})"
+                           title="Modifier">
+                            <i class="fas fa-edit"></i>
+                        </a>
+                        
+                        <form action="{{ route('users.destroy', $alluser->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" 
+                                    class="btn btn-sm btn-danger"
+                                    data-bs-toggle="tooltip"
+                                    title="Supprimer"
+                                    onclick="return confirm('Confirmer la suppression ?')">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </form>
+                    </div>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="6" class="text-center py-4">Aucun événement trouvé</td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+</div>
+
+<!-- Modal de modification -->
+<div class="modal fade" id="editUserModal" tabindex="-1" aria-labelledby="editUserModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content border-0 shadow-lg">
+            <div class="modal-header bg-[#A12C2F]">
+                <h5 class="modal-title" id="editUserModalLabel">
+                    <i class="fas fa-user-edit me-2"></i>Modifier l'utilisateur
+                </h5>
+                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="POST" action="{{ route('users.update', $alluser->id ?? '') }}" id="editUserForm" enctype="multipart/form-data">
+                @csrf
+                @method('PUT')
+                <div class="modal-body">
+                    <!-- Nom -->
+                    <div class="mb-3">
+                        <label for="edit_name" class="form-label">Nom complet</label>
+                        <input type="text" class="form-control" id="edit_name" name="name" value="{{ old('name', $alluser->name ?? '') }}" required>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="mb-3">
+                        <label for="edit_email" class="form-label">Adresse email</label>
+                        <input type="email" class="form-control" id="edit_email" name="email" value="{{ old('email', $alluser->email ?? '') }}" required>
+                    </div>
+
+                    <!-- Téléphone -->
+                    <div class="mb-3">
+                        <label for="edit_phone" class="form-label">Téléphone</label>
+                        <input type="tel" class="form-control" id="edit_phone" name="phone" value="{{ old('phone', $alluser->phone ?? '') }}" required>
+                    </div>
+
+                    <!-- Avatar -->
+                    <div class="mb-3">
+                        <label for="edit_avatar" class="form-label">Photo de profil</label>
+                        <input type="file" class="form-control" id="edit_avatar" name="avatar" accept="image/*">
+                    </div>
+
+                    <!-- Rôle -->
+                    <div class="mb-3">
+                        <label for="edit_role" class="form-label">Rôle</label>
+                        <select class="form-select" id="edit_role" name="role" required>
+                            <option value="admin" {{ old('role', $alluser->role ?? '') === 'admin' ? 'selected' : '' }}>Administrateur</option>
+                            <option value="editor" {{ old('role', $alluser->role ?? '') === 'editor' ? 'selected' : '' }}>Éditeur</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Annuler</button>
+                    <button type="submit" class="btn btn-primary">Mettre à jour</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
 <!-- Toast de succès -->
 <div class="toast-container position-fixed bottom-0 end-0 p-3">
     <div id="successToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
@@ -227,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 @endsection
 
-@section('extra-script')
+@section('extra-scripts')
 <script>
 document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('userForm');

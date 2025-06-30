@@ -3,14 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <link rel="icon" href="{{ asset('assets/images/anepes-logo.jpg') }}" type="image/x-icon">
+    <meta name="description" content="ANEEPES Admin Dashboard">
+    <meta name="keywords" content="ANEEPES, Admin, Dashboard, Management">
+    <meta name="author" content="ANEEPES Team">
+    <meta name="theme-color" content="#A12C2F">
+    <meta name="application-name" content="ANEEPES Admin">
+    <meta name="apple-mobile-web-app-title" content="ANEEPES Admin">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="msapplication-TileColor" content="#A12C2F">
+    <meta name="msapplication-TileImage" content="{{ asset('assets/images/anepes-logo.jpg') }}">
     <title>ANEEPES Admin - @yield('title')</title>
     
     <!-- Styles -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/css/adminlte.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.3/font/bootstrap-icons.css">
-
+    <script src="https://cdn.fedapay.com/checkout.js?v=1.1.2"></script>
     
     <style>
         :root {
@@ -18,6 +32,7 @@
             --accent-color: #D4AF37;
             --sidebar-width: 280px;
         }
+        
 
         .main-sidebar {
             background: #2a2a2a;
@@ -60,46 +75,32 @@
 
         <!-- Right navbar links -->
         <ul class="navbar-nav ml-auto">
-            <!-- Notifications -->
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                    <i class="far fa-bell" style="color: var(--primary-color);"></i>
-                    <span class="badge badge-danger navbar-badge">3</span>
-                </a>
-                <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-                    <!-- Dropdown content -->
-                </div>
-            </li>
+          
             
             <!-- User Menu -->
 
-            <li class="nav-item dropdown">
-                <a class="nav-link" data-toggle="dropdown" href="#">
-                  <p> "{{ auth()->user()->name ?? ''}}</p>
-                </a>
-                <div class="dropdown-menu dropdown-menu-right">
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-user mr-2"></i> Profil
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a href="#" class="dropdown-item">
-                        <i class="fas fa-sign-out-alt mr-2"></i> Déconnexion
-                    </a>
-                </div>
-            </li>
-            @if(Auth::check())
-            <!-- Afficher l'avatar -->
-            <img src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('images/default-avatar.png') }}" 
-            alt="Avatar de {{ auth()->user()->name }}" 
-            class="rounded-circle"
-            style="width: 50px; height: 50px; object-fit: cover;">
-            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                Logout
-            </a>
+           
             
-            <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                @csrf
-            </form>
+            @if(Auth::check())
+
+              <div class="col-md-6 text-md-end">
+                    <div class="d-flex align-items-center justify-content-end">
+                        <div class="dropdown">
+                            <button class="btn btn-outline-light dropdown-toggle" type="button" id="userMenu" data-bs-toggle="dropdown">
+                                <img src="{{ auth()->user()->avatar ? asset('storage/' . auth()->user()->avatar) : asset('images/default-avatar.png') }}" 
+                                alt="Avatar de {{ auth()->user()->name }}" 
+                                class="rounded-circle"
+                                style="width: 50px; height: 50px; object-fit: cover;">
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-user me-2"></i>Profil</a></li>
+                                <li><a class="dropdown-item" href="#"><i class="fas fa-cog me-2"></i>Paramètres</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><i class="fas fa-sign-out-alt me-2"> <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Déconnexion</a><form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">@csrf</form></i></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             
                  
             @else
@@ -108,6 +109,10 @@
                  </div>
                  
              @endif 
+
+
+
+        
         </ul>
     </nav>
 
@@ -129,14 +134,31 @@
                             <p>Tableau de bord</p>
                         </a>
                     </li>
+            
                     
+  
                     <li class="nav-item">
                         <a href="{{route('staff')}}" class="nav-link {{ request()->is('staff') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-users"></i>
+                            <p>Gestion des utilisateurs</p>
+                        </a>
+                    </li>
+
+                    <li class="nav-item">
+                        <a href="{{route('members.index')}}" class="nav-link {{ request()->is('members') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-users"></i>
                             <p>Gestion des membres</p>
                         </a>
                     </li>
 
+                      <li class="nav-item">
+                        <a href="{{route('subscription')}}" class="nav-link {{ request()->is('subscription') ? 'active' : '' }}">
+                            <i class="nav-icon fas  fa-money-check-alt"></i>
+                            <p>Subscription</p>
+                        </a>
+                    </li>
+                
+             
                     <li class="nav-item">
                         <a href="{{route('events.index')}}" class="nav-link {{ request()->is('admin/evenements*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-calendar-alt"></i>
@@ -159,11 +181,21 @@
                     </li>
 
                     <li class="nav-item">
+                        <a href="{{ route('subscriptions.index') }}" class="nav-link {{ request()->is('/cotisations') ? 'active' : '' }}">
+                            <i class="nav-icon fas fa-hand-holding-usd"></i>
+                            <p>Payer ma cotisation</p>
+                        </a>
+                    </li>
+                    
+
+               
+                     <li class="nav-item">
                         <a href="{{ route('admin.posts.index') }}" class="nav-link {{ request()->is('admin/posts*') ? 'active' : '' }}">
                             <i class="nav-icon fas fa-newspaper"></i>
                             <p>Blog</p>
                         </a>
-                    </li>
+                   </li>
+             
                     
 
                     <!-- Additional Menu Items -->
@@ -196,24 +228,25 @@
                 @yield('content')
             </div>
         </section>
+
+
+        
+
+
+
+
+
     </div>
 
     <!-- Footer -->
-    <footer class="main-footer" style="background: var(--primary-color); color: white; padding: 1rem;">
-        <div class="container text-center">
-        <strong>Copyright &copy; {{ date('Y') }} ANEEPES-Bénin </strong>
-        <div class="float-right d-none d-sm-inline-block">
-            v1.0.0
-        </div>
-        <p> "Solidarité – Innovation - Excellence"</p>
-       
-        </div>
-    </footer>
+  
 </style>
 
 </div>
 
 <!-- Scripts -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>

@@ -6,6 +6,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Actualite ;
 use Illuminate\Support\Facades\Storage;
+use App\Models\Newsletter ;
+use App\Notifications\NewContentNotification;
+use Illuminate\Support\Str;
+
 
 use HTMLPurifier;
 use HTMLPurifier_Config;
@@ -65,7 +69,22 @@ class ActualitesController extends Controller
         $config = HTMLPurifier_Config::createDefault();
         $purifier = new HTMLPurifier($config);
         $validated['description'] = $purifier->purify($request->description);
-        Actualite::create($validated);
+      $actualite= Actualite::create($validated);
+
+        if ( $validated['status']  === 'published') {
+            $subscribers = Newsletter::get();
+            
+            foreach ($subscribers as $subscriber) {
+                $subscriber->notify(new NewContentNotification(
+                    'article',
+                    $validated['title'],
+                    Str::limit(strip_tags( $validated['description']), 150),
+                    route('actualites.show',$actualite->id)
+                ));
+            }
+            
+           
+        }
 
         return redirect()->route('news.index')->with('success', 'Actualité mise à jour!');
 
