@@ -91,7 +91,7 @@
                 <h2 class="text-2xl font-bold text-[#A12C2F]">{{ $poll->question }}</h2>
                 <div class="flex items-center mt-2 text-sm text-gray-500">
                     <span class="mr-4">🕑 {{ $poll->end_at ? $poll->end_at->diffForHumans() : 'Sans limite' }}</span>
-                    <span>🗳 {{ $poll->votes_count }} votes</span>
+                    <span>🗳{{ $poll->total_votes }} votes</span>
                 </div>
             </div>
 
