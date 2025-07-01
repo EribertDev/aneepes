@@ -1,14 +1,9 @@
-
-
+DirectoryIndex index.php
 <IfModule mod_rewrite.c>
     RewriteEngine On
-    
-    # Rediriger www.aneepes vers aneepes.cesiebenin.com
-    RewriteCond %{HTTP_HOST} ^www\.aneepes\.com$ [NC]
-    RewriteRule ^(.*)$ http://aneepes.cesiebenin.com/$1 [L,R=301]
-    
-    # Redirection standard Laravel
-    RewriteCond %{REQUEST_FILENAME} !-d
-    RewriteCond %{REQUEST_FILENAME} !-f
-    RewriteRule ^ index.php [L]
+    RewriteBase /
+    RewriteRule ^$ public/index.php [L]
+    RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
 </IfModule>
+
+
