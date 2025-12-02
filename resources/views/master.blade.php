@@ -1,8 +1,10 @@
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>ANEPES-@yield('title', 'Titre par défaut')</title> 
+    <title>ANEPES-@yield('title', 'Titre par défaut')</title>
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="" name="keywords">
     <meta name="description" content="@yield('description', 'ANEPES')">
     <meta property="og:title" content="@yield('title-article', 'ANEPES')">
@@ -17,18 +19,18 @@
     <!-- Balises Meta pour formater les messages sur WhatsApp -->
     <meta property="wa:fontStyle" content="italic">
     <meta property="wa:bold" content="true">
-     <!-- Favicon --> 
+     <!-- Favicon -->
      <link href="{{asset('assets/images/anepes-logo.jpg')}}" rel="icon">
 
      <!-- Google Web Fonts -->
      <link rel="preconnect" href="https://fonts.googleapis.com">
      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
      <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@400;500;600&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
- 
+
      <!-- Icon Font Stylesheet -->
      <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
      <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
- 
+
     <!-- Bootstrap core CSS -->
     <link href="{{asset('vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
 
@@ -51,8 +53,8 @@
 
 </head>
 <body>
-   
-  
+
+
 
     @include('partials.header')
     @yield('content')
@@ -62,13 +64,13 @@
   <script src="{{asset('vendor/jquery/jquery.min.js')}}"></script>
   <script src="{{asset('vendor/bootstrap/js/bootstrap.min.js')}}"></script>
 
-  <script src="{{asset('assets/js/isotope.min.js')}}"></script>
   <script src="{{asset('assets/js/owl-carousel.js')}}"></script>
   <script src="{{asset('assets/js/lightbox.js')}}"></script>
   <script src="{{asset('assets/js/tabs.js')}}"></script>
   <script src="{{asset('assets/js/video.js')}}"></script>
   <script src="{{asset('assets/js/slick-slider.js')}}"></script>
   <script src="{{asset('assets/js/custom.js')}}"></script>
+
   <script>
       //according to loftblog tut
       $('.nav li:first').addClass('active');
